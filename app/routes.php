@@ -13,7 +13,6 @@
 
 Route::get('/', function()
 {
-	return Str::random(20);
 	return View::make('hello');
 });
 
