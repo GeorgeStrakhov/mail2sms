@@ -9,7 +9,7 @@ class InboundEmailController extends BaseController {
 
     public function postIndex() //accepting Mandrill requests from here
     {
-        
+        return 'ok';
     }
 
 }
