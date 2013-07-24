@@ -16,8 +16,6 @@ return array(
 	|
 	*/
 
-	'proxies' => array(
-		'*',
-	),
+	'proxies' => '*'
 
 );
