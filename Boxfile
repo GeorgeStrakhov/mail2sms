@@ -10,7 +10,7 @@ web1:
     - xcache
     - curl
   php_session_save_handler: redis
-  php_session_save_path: "tcp://tunnel.pagodabox.com:6380"
+  php_session_save_path: "tcp://tunnel.pagodabox.com:6379"
   shared_writable_dirs:
     - app/storage/cache
     - app/storage/logs
@@ -26,6 +26,4 @@ web1:
   before_deploy:
     - "php artisan migrate"
 cache1:
-  type: redis
-cache2:
   type: redis
