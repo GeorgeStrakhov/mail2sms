@@ -6,10 +6,13 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 ### Before Shipping:
 * create users table & controller
 * inbound email processing: make email controller do the job
-* superadmin interface - for adding balance to people
+* superadmin interface - for adding balance to people etc.
 * paypal:
 	- figure out how to pass additional data to the paypal button and then to the IPN (so that email identifier of the account can be passed)
 	- integrate IPN (via payum)
+	- IPN handler:
+		- if user (email) exists
+		- if user (email) doesn't exist
 	- create routes and views:
 		- http://mail2sms.co/buymore -> put paypal button / form  there
 		- http://mail2sms.co/payment/success
