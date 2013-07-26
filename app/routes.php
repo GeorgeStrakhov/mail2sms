@@ -11,15 +11,12 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
 
 Route::controller('/test', 'TestController');
 
-Route::resource('messages', 'MessagesController');
+Route::resource('/m', 'MessagesController');
 
+Route::controller('/', 'HomeController');
 
 /*
 * Inbound hook for mandrill
@@ -27,3 +24,10 @@ Route::resource('messages', 'MessagesController');
 */
 $secretMandrillHook = isset($_SERVER['MANDRILL_SECRET_HOOK']) ? $_SERVER['MANDRILL_SECRET_HOOK'] : null;
 Route::controller('/api/inboundemailhook/'.$secretMandrillHook, 'InboundEmailController');
+
+/*
+* paypal ipn hook for getting notified when a payment is made
+* again, hide the url via using env variable
+*/
+$secretPaypalHook = isset($_SERVER['PAYPAL_SECRET_HOOK']) ? $_SERVER['PAYPAL_SECRET_HOOK'] : null;
+Route::controller('/api/paypalipnhook/'.$secretPaypalHook, 'PaymentsController');

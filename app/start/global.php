@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -52,6 +54,20 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 });
+
+/*
+* 404 errors
+*/
+App::error(function(ModelNotFoundException $e)
+{
+    return Response::view('errors.missing', array(), 404);
+});
+
+App::missing(function($exception)
+{
+    return Response::view('errors.missing', array(), 404);
+});
+
 
 /*
 |--------------------------------------------------------------------------

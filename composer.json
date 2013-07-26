@@ -6,9 +6,9 @@
 		"laravel/framework": "4.0.*",
 		"fideloper/proxy": "dev-master",
 		"way/generators": "dev-master",
-		"twitter/bootstrap": "dev-master",
 		"twilio/sdk": "dev-master",
-		"twilio/laratwilio": "dev-master"
+		"twilio/laratwilio": "dev-master",
+		"payum/paypal-ipn": "0.6.*@dev"
 	},
 	"autoload": {
 		"classmap": [

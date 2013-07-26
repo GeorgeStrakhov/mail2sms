@@ -3,21 +3,46 @@
 class HomeController extends BaseController {
 
 	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
+	* get landing page
 	*/
 
-	public function showWelcome()
+	public function getIndex()
 	{
-		return View::make('hello');
+		//make an educated guess about the countrycode based on IP address
+		$ip = Request::getClientIp();
+		//skip sending a request to geoplugin when on dev
+		$countryName = (App::environment() == 'dev') ? 'HK' : self::getCountryFromIp($ip);;
+		$countryCode = self::getCountryCodeFromCountryName($countryName);
+		//return the view
+		return View::make('landing')
+			->with('countryCode', $countryCode);
+	}
+
+	/*
+	* get guess country name from user ip
+	*/
+
+	protected static function getCountryFromIp($ip)
+	{
+		//make it easier for testing - ignore local ips
+		if(!$ip || substr($ip, 0, 7) == '192.168' || substr($ip, 0, 7) == '127.0.0' ) {
+			$ip = '';
+		}
+		//send request to geoplugin
+		$xml = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".$ip);
+		return (string) $xml->geoplugin_countryCode;
+	}
+
+	/*
+	* get country code (phone) from a name
+	*/
+
+	protected static function getCountryCodeFromCountryName($countryName)
+	{
+		if(!$countryName) return '';
+		$xml = simplexml_load_file(app_path().'/lib/icc.xml');
+		$code = (string) $xml->$countryName;
+		return ($code) ? $code : '';
 	}
 
 }

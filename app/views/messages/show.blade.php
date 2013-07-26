@@ -1,43 +1,16 @@
-@extends('layouts.scaffold')
+@extends('layouts.basic')
 
-@section('main')
+@section('heading')
+    <div class="muted" style="margin-left: 3px;">
+        <span style="text-decoration: underline;">from</span>:
+            {{($message->from_name) ? $message->from_name.', ' : ''}} {{explode('@', $message->from_email)[0]}}&#64;{{explode('@', $message->from_email)[1]}}
+    </div>
+    <h1>{{$message->subject}}</h1>
+@stop
 
-<h1>Show Message</h1>
-
-<p>{{ link_to_route('messages.index', 'Return to all messages') }}</p>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Raw_msg</th>
-				<th>Headers</th>
-				<th>Html</th>
-				<th>Text</th>
-				<th>Subject</th>
-				<th>To</th>
-				<th>From_email</th>
-				<th>From_name</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>{{{ $message->raw_msg }}}</td>
-					<td>{{{ $message->headers }}}</td>
-					<td>{{{ $message->html }}}</td>
-					<td>{{{ $message->text }}}</td>
-					<td>{{{ $message->subject }}}</td>
-					<td>{{{ $message->to }}}</td>
-					<td>{{{ $message->from_email }}}</td>
-					<td>{{{ $message->from_name }}}</td>
-                    <td>{{ link_to_route('messages.edit', 'Edit', array($message->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-                        {{ Form::open(array('method' => 'DELETE', 'route' => array('messages.destroy', $message->id))) }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
-        </tr>
-    </tbody>
-</table>
-
+@section('content')
+    {{($message->html) ? $message->html : nl2br($message->text)}}
+    <div style="text-align: center; margin: 20px;">
+        <a href="mailto:{{$message->from_email}}" class="btn btn-large btn-green rounded">reply</a>
+    </div>
 @stop

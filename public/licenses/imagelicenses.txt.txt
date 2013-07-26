@@ -1,0 +1,54 @@
+All image items are inside the "img" folder.
+
+> carousel.jpeg
+> logoplaceholder.png
+> previewImage.png
+Author: me
+License: (for both images only)
+Creative Commons Attribution-NoDerivs 3.0 Unported License.
+
+Phone Template used in
+> huge-phone.png
+> iphone-placeholder.png
+Author: Nathan Powell
+Link:	http://dribbble.com/shots/664044-Iphone-Wireframe-Template?list=searches
+License:
+All design elements are created exclusively by Nathan Powell at Hand Made Studio.
+
+--------------------------------------------------------------------------------------------------------------------
+
+How to use:
+
+Feel free to use any of my freebies as you see fit, without the need to give credit or similar.
+
+I only request that you don't distribute my design elements as your own  work or anywhere else without my express consent.
+
+Of course, feel free to speed the love. Oh… tell all your friends.
+
+Good luck!
+
+Nathan Powell
+www.handmadestudio.info
+
+Chrome Template used in
+> placeholder.png
+Author: Maykel Loomans
+Link:	http://dribbble.com/shots/271954-Simple-Browser-Chrome-PSD?list=users
+License:
+No license mentioned
+
+> bg.png
+Author: SubtlePatterns  
+Link:	www.subtlepatterns.com
+License:
+Creative Commons Attribution-ShareAlike 3.0 Unported License.
+<div xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/about/"><span property="dct:title">Subtle Patterns</span> (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) / <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></div>
+
+Icons used in:
+> Aeroplane.png
+> Nodes.png
+> airplane icons in huge-phone.png, iphone-placeholder.png and placholder.png
+Author: SyncFusion MetroStudio 2 
+Link:	http://www.syncfusion.com/downloads/metrostudio_beta
+License: 
+Use of Licensed Program(s) and Limitation of Liability:  You are solely responsible for all use of the Licensed Programs, and Syncfusion assumes no liability whatsoever for Your use.  Syncfusion provides no indemnity of any kind for any claims that may arise from Your use of the Licensed Programs.  The Licensed Programs may be used to manipulate fonts to create custom icons; therefore, any such use may violate Your licensed rights in or to certain fonts that You may have licensed from a third party.  Therefore, any such use may create liabilities for You for which You will remain solely liable.  Your use of the Licensed Programs in such a manner shall be deemed your acceptance of all such liabilities; accordingly, you agree to indemnify and hold harmless Syncfusion from any claims that may arise from such use.  The Licensed Program(s) are tools that are not intended to replace the professional skills and judgment of Customer and its employees, agents and consultants.  Customer alone shall be responsible for the accuracy and adequacy of information and data furnished for processing and any use made by Customer of the output of the Licensed Program or any reliance thereon by Customer or users of Customer products.  Customer shall also be responsible for the continued operation and maintenance of the computer equipment and the third-party software used with the Licensed Program.  For these reasons, Customer agrees to be solely responsible for the design, repair and configuration of Customer’s equipment, machinery, systems and/or products.  Customer assumes all risks and liability for results obtained by the use of and/or implementation of the designs developed by Customer that are in any way influenced by the use of the Licensed Program(s) or the provision of services, whether such designs are used singly or in combination with other designs or products.  Customer shall protect, indemnify, hold harmless and defend Syncfusion of and from any loss, cost, damage or expense, including attorneys’ fees, arising from any claim asserted against Syncfusion that is in any way associated with the matters set forth in this Section 8.
