@@ -45,8 +45,6 @@ class InboundEmailController extends BaseController {
 			}
 			$newMessage->save();
 
-			dd('end');
-
 			//extract the phone number
 			if(!$newMessage->to) return '"to" not passed';
 			$allRecepients = json_decode($newMessage->to);
