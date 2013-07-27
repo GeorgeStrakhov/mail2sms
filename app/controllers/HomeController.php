@@ -25,6 +25,16 @@ class HomeController extends BaseController {
 			->with('userEmail', $userEmail);
 	}
 
+	public function getPaymentsuccess()
+	{
+		return View::make('paymentsuccess');
+	}
+
+	public function getPaymentcancel()
+	{
+		return View::make('paymentcancel');
+	}
+
 	/*
 	* get guess country name from user ip
 	*/
