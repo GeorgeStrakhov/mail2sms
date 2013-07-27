@@ -4,26 +4,10 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 
 ## Todo
 ### Before Shipping:
-* create /buymore page and test paypal
-* inbound email processing: make email controller do the job
-* paypal:
-	- figure out how to pass additional data to the paypal button and then to the IPN (so that email identifier of the account can be passed)
-	- integrate IPN (via payum)
-	- IPN handler:
-		- if user (email) exists
-		- if user (email) doesn't exist
-	- create routes and views:
-		- http://mail2sms.co/buymore -> put paypal button / form  there
-		- http://mail2sms.co/payment/success
-		- http://mail2sms.co/payment/cancel
-* boring:
-	- http://mail2sms.co/boring/privacypolicy
-	- http://mail2sms.co/boring/useragreement
+* inbound email processing: make email controller do the job.
+* send out sms messages (try / catch)
 * before final deploy:
 	* turn `debug mode` config off for production
-
-### After Shipping:
-* switch to Laravel queue for processing incoming mail and sending out sms
 
 ## Done:
 * install bootstrap, jquery(cdn), theme
@@ -34,3 +18,22 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 * select a theme on wrapbootstrap
 * superadmin interface - for adding balance to people etc. (phpmyadmin will do)
 * create users table & controller
+* paypal:
+	- figure out how to pass additional data to the paypal button and then to the IPN (so that email identifier of the account can be passed)
+	- integrate IPN (via payum)
+	- IPN handler:
+		- if user (email) exists
+		- if user (email) doesn't exist
+	- create routes and views:
+		- http://mail2sms.co/getmore -> put paypal button / form  there
+		- http://mail2sms.co/payment/success
+		- http://mail2sms.co/payment/cancel
+* boring:
+	- http://mail2sms.co/tos
+* email layout and templates:
+	+ welcome
+	+ creditsadded
+	+ problemwithmessage
+	+ messagesent
+	+ notenoughcredits
+* make payments controller send emails

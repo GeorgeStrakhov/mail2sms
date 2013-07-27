@@ -59,7 +59,7 @@
 			<p>What's your phone number?</p>
 			<input type="text" id="mobileNumber" value="+{{$countryCode}}" class="input-block-level" />
 			<small class="muted">Please make sure to put the correct country code in.</small><br />
-			<small class="muted">By using this you agree to to our <a href="/boring/tc">terms and conditions</a>.</small>
+			<small class="muted">By using this you agree to to our <a href="/tos">terms of service</a>.</small>
 		</div>
 		<div class="modal-footer" style="text-align: center">
 			<a href="mailto:{{$countryCode}}@mail2sms.co?subject=Hello+SMS&body=write+your+long+text+here" id="activateEmail" target="_blank" class="btn btn-primary">send mail2sms</a>

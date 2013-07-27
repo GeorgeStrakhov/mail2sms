@@ -11,8 +11,17 @@
 |
 */
 
-
-Route::controller('/test', 'TestController');
+if(App::environment() == 'dev')  {
+	Route::controller('/test', 'TestController');
+	Route::get('/preview/{slug}', function($slug){
+		return View::make($slug)
+			->with('userEmail', 'george.strakhov@gmail.com')
+			->with('remainingCredits', 45)
+			->with('error', 'Phone number 927384 doesn\'t exist')
+			->with('newMessageSlug', '28sf79')
+			->with('toNumber', '85294377499');
+	});
+}
 
 Route::resource('/m', 'MessagesController');
 

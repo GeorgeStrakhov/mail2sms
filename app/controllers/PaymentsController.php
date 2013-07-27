@@ -23,16 +23,19 @@ class PaymentsController extends BaseController {
 	{
 		//1. check for validity and uniqueness and write request to the payments table
 		$data = Input::all();
-		if(!$data) return 'no data passed';
+		if(!$data) throw new Exception('no data passed');
 
 		$txn_id = Input::get('txn_id');
-		if(!$txn_id) return 'txn_id not passed';
+		if(!$txn_id) throw new Exception('txn_id not passed');
 
-		//$isValid = self::checkIpnValid($data);
-		//if(!$isValid) return 'reuqest not valid';
+		//sanity checks - skip on dev environment
+		if(App::environment() != 'dev') {
+			$isValid = self::checkIpnValid($data);
+			if(!$isValid) throw new Exception('reuqest not valid');
 
-		$alreadyProcessed = Payment::where('txn_id', '=', $txn_id)->first();
-		//if($alreadyProcessed) return 'transaction with this id already processed';
+			$alreadyProcessed = Payment::where('txn_id', '=', $txn_id)->first();
+			if($alreadyProcessed) return 'transaction with this id already processed'; //we're not throwing an exception here so that Paypal can still get a 200 OK response and stop sending stuff to us.
+		}
 
 		self::makePaymentRecord($data, $txn_id);
 
@@ -40,7 +43,9 @@ class PaymentsController extends BaseController {
 		$userEmail = Input::get('custom');
 		if(!$userEmail) throw new Exception('Email not passed');
 		$user = User::where('email', '=', $userEmail)->first();
+		$newUser = false;
 		if(!$user) {
+			$newUser = true;
 			$user = new User;
 			$user->email = $userEmail;
 			$user->password = Hash::make(Str::random(10));
@@ -67,6 +72,21 @@ class PaymentsController extends BaseController {
 		$user->save();
 
 		//5. send an email to the user with the notification
+		$emailData = array(
+			'remainingCredits' 	=>  $user->credits,
+			'userEmail'			=>	$user->email
+		);
+		if($newUser) {
+			Mail::send('emails.welcome', $emailData, function($message) use ($user)
+			{
+				$message->to($user->email)->subject('Welcome to mail2sms!');
+			});
+		} else {
+			Mail::send('emails.creditsadded', $emailData, function($message) use ($user)
+			{
+				$message->to($user->email)->subject('Balance topped up! You now have '.$user->credits.' mail2sms credits.');
+			});
+		}
 
 		return 'ok';
 	}
@@ -86,7 +106,7 @@ class PaymentsController extends BaseController {
 		$isValid = false;
 
 		$api = new Api(new Curl, array(
-		    'sandbox' => false
+		    'sandbox' => (App::environment() == 'dev') ? true : false
 		));
 
 		if (Api::NOTIFY_VERIFIED === $api->notifyValidate($_GET)) {

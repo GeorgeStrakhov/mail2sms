@@ -35,6 +35,11 @@ class HomeController extends BaseController {
 		return View::make('paymentcancel');
 	}
 
+	public function getTos()
+	{
+		return View::make('tos');
+	}
+
 	/*
 	* get guess country name from user ip
 	*/
