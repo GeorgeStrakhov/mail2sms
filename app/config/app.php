@@ -117,7 +117,7 @@ return array(
 		//Way's generators
 		'Way\Generators\GeneratorsServiceProvider',
 		//Laratwilio
-		'Twilio\Laratwilio\LaratwilioServiceProvider'
+		'Twilio\Laratwilio\LaratwilioServiceProvider',
 
 	),
 

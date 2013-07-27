@@ -16,7 +16,6 @@ Route::controller('/test', 'TestController');
 
 Route::resource('/m', 'MessagesController');
 
-Route::controller('/', 'HomeController');
 
 /*
 * Inbound hook for mandrill
@@ -31,3 +30,5 @@ Route::controller('/api/inboundemailhook/'.$secretMandrillHook, 'InboundEmailCon
 */
 $secretPaypalHook = isset($_SERVER['PAYPAL_SECRET_HOOK']) ? $_SERVER['PAYPAL_SECRET_HOOK'] : null;
 Route::controller('/api/paypalipnhook/'.$secretPaypalHook, 'PaymentsController');
+
+Route::controller('/', 'HomeController');
