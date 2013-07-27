@@ -36,6 +36,7 @@ class InboundEmailController extends BaseController {
 
 			//write the new message to the DB
 			$newMessage = new Message;
+			$newMessage->slug = $newSlug;
 			$newMessage->raw_json = $input;
 			foreach ($dataFields as $df){
 				if(isset($msg->$df)){
