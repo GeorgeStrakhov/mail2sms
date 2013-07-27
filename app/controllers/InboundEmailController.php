@@ -81,7 +81,7 @@ class InboundEmailController extends BaseController {
 					} else {
 						$who = $newMessage->from_email;
 					}
-					$smsText = "Hey! $who just sent you a message. Check it out here: http://mail2sms.co/m/$newMessage->slug";
+					$smsText = "Hey! $who just sent you a message. Check it out here: http://mail2sms.co/m/".$newMessage->slug;
 
 					//try sending it
 					Sms::send(array('to'=>$phoneNumber, 'text'=>$smsText));
