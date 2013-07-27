@@ -64,6 +64,19 @@ class InboundEmailController extends BaseController {
 				$user->credits = 3;
 				$user->save();
 			}
+
+			//check that the user has enough credits
+			if($user->credits<=0) {
+				$emailData = [
+					'remainingCredits' 	=> $user->credits,
+					'userEmail'			=> $user->email,
+				];
+				Mail::send('emails.notenoughcredits', $emailData, function($message) use ($user)
+				{
+					$message->to($user->email)->subject('Oooops, looks like you\'ve run out of money!');
+				});				
+				return "not enough credits";
+			}
 			
 			//try sending a message to twilio
 			try {
