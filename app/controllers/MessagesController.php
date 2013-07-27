@@ -26,6 +26,7 @@ class MessagesController extends BaseController {
 		if(!$message) App::abort(404);
 		$message->text = preg_replace('/\v+|\\\[rn]/','<br/>',$message->text); //nl2br is not working, most likely due to real_mysql_escape_string somewhere in laravel
 		$message->html = self::sanitizeHtml($message->html);
+		$message->subject = self::sanitizeHtml($message->subject);
 		return View::make('messages.show', compact('message'));
 	}
 

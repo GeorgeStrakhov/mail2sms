@@ -36,7 +36,6 @@ class InboundEmailController extends BaseController {
 
 			//write the new message to the DB
 			$newMessage = new Message;
-			$newMessage->slug = $newSlug;
 			$newMessage->raw_json = $input;
 			foreach ($dataFields as $df){
 				if(isset($msg->$df)){
@@ -102,7 +101,7 @@ class InboundEmailController extends BaseController {
 				}
 
 				//all looks good. let's deduct credit from the sender
-				$user->credit = $user->credit-1;
+				$user->credits = $user->credits-1;
 				$user->save();
 
 				//and send the success message back to the sender
