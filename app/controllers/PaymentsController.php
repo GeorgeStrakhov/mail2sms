@@ -31,7 +31,7 @@ class PaymentsController extends BaseController {
 		//sanity checks - skip on dev environment
 		if(App::environment() != 'dev') {
 			$isValid = self::checkIpnValid($data);
-			if(!$isValid) throw new Exception('reuqest not valid');
+			if(!$isValid) throw new Exception('request not valid');
 
 			$alreadyProcessed = Payment::where('txn_id', '=', $txn_id)->first();
 			if($alreadyProcessed) return 'transaction with this id already processed'; //we're not throwing an exception here so that Paypal can still get a 200 OK response and stop sending stuff to us.
@@ -109,7 +109,7 @@ class PaymentsController extends BaseController {
 		    'sandbox' => (App::environment() == 'dev') ? true : false
 		));
 
-		if (Api::NOTIFY_VERIFIED === $api->notifyValidate($_GET)) {
+		if (Api::NOTIFY_VERIFIED === $api->notifyValidate($_POST)) {
 		    $isValid = true;
 		}
 
