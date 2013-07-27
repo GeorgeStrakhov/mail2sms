@@ -16,7 +16,6 @@ Route::controller('/test', 'TestController');
 
 Route::resource('/m', 'MessagesController');
 
-
 /*
 * Inbound hook for mandrill
 * we don't want to expose our API hook for everybody to open massive sms spam, so we use env variable to declare the secret route for the hook

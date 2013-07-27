@@ -27,7 +27,6 @@ web1:
     - "rm -f app/storage/views/*"
     - "php artisan db:seed"
   before_deploy:
-    - "php artisan migrate:install"
     - "php artisan migrate"
 cache1:
   type: redis

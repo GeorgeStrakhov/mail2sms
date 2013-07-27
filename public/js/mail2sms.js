@@ -43,8 +43,33 @@ jQuery(document).ready(function($){
 
 	//get the value from the field and clean it up
 	function getMobileNumber() {
+		if(!($('#mobileNumber').length)) return false;
 		//strip away all the non-numbers
 		return $('#mobileNumber').val().replace(/\D+/g, '' );
 	}
 
+	//update email on the getmore page
+	$('#newUserEmail').on('keyup', function() {
+		$('#userEmail').attr('value', $(this).val());
+	});
+
+	//submit buy more form
+	$('#buyMoreButton').on('click', function(e) {
+		e.preventDefault();
+		//validate
+		var email = $('#userEmail').val();
+		var valid = validateEmail(email);
+		if(!valid){
+			alert(email+' doesn\'t look like a proper email address. Please double check.');
+			return;
+		}
+		//submit
+		var form = $(this).closest('form');
+		form.submit();
+	});
+
+	function validateEmail(email) {
+		var re = /\S+@\S+\.\S+/;
+		return re.test(email);
+	}
 });

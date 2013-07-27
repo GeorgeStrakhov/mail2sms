@@ -18,6 +18,13 @@ class HomeController extends BaseController {
 			->with('countryCode', $countryCode);
 	}
 
+	public function getGetmore()
+	{
+		$userEmail = Input::get('email');
+		return View::make('getmore')
+			->with('userEmail', $userEmail);
+	}
+
 	/*
 	* get guess country name from user ip
 	*/
