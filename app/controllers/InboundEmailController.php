@@ -37,12 +37,15 @@ class InboundEmailController extends BaseController {
 			//write the new message to the DB
 			$newMessage = new Message;
 			$newMessage->slug = $newSlug;
+			$newMessage->raw_json = $input;
 			foreach ($dataFields as $df){
 				if(isset($msg->$df)){
 					$newMessage->$df = (gettype($msg->$df) == 'object' || gettype($msg->$df) == 'array') ? json_encode($msg->$df) : $msg->$df;
 				}
 			}
 			$newMessage->save();
+
+			dd('end');
 
 			//extract the phone number
 			if(!$newMessage->to) return '"to" not passed';
