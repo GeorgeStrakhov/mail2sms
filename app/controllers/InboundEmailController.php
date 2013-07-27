@@ -46,69 +46,82 @@ class InboundEmailController extends BaseController {
 
 			//extract the phone number
 			if(!$newMessage->to) return '"to" not passed';
-			$phoneNumber = '+'.explode('@', $newMessage->to)[0];
-			//extract the from email
-			if(!$newMessage->from_email) return '"from_email" not passed';
-			$senderEmail = $newMessage->fromEmail;
-
-			//find or create the user
-			$user = User::where('email', $senderEmail)->first();
-			if(!$user) {
-				$user = new User;
-				$user->email = $userEmail;
-				$user->password = Hash::make(Str::random(10));
-				$user->credits = 3;
-				$user->save();
+			$allRecepients = json_decode($newMessage->to);
+			if(!$allRecepients) return '"to" incorrect';
+			$toNumbers = [];
+			foreach ($allRecepients as $recepient) {
+				$domainName = explode('@', $recepient[0])[1];
+				if($domainName == 'mail2sms.co'){
+					array_push($toNumbers, '+'.explode('@', $recepient[0])[0]);
+				}
 			}
-			
-			//try sending a message to twilio
-			try {
-				//create the sms text
-				if($newMessage->from_name && strlen($newMessage->fromName)<25) {
-					$who = "$newMessage->from_name ($newMessage->from_email)";
-					if(strlen($who)>70) {
+
+			foreach ($toNumbers as $phoneNumber) {
+				//extract the from email
+				if(!$newMessage->from_email) return '"from_email" not passed';
+				$senderEmail = $newMessage->from_email;
+				//find or create the user
+				$user = User::where('email', $senderEmail)->first();
+				if(!$user) {
+					$user = new User;
+					$user->email = $senderEmail;
+					$user->password = Hash::make(Str::random(10));
+					$user->credits = 3;
+					$user->save();
+				}
+				
+				//try sending a message to twilio
+				try {
+					//create the sms text
+					if($newMessage->from_name && strlen($newMessage->fromName)<25) {
+						$who = "$newMessage->from_name ($newMessage->from_email)";
+						if(strlen($who)>70) {
+							$who = $newMessage->from_email;
+						}
+					} else {
 						$who = $newMessage->from_email;
 					}
-				} else {
-					$who = $newMessage->from_email;
+					$smsText = "Hey! $who just sent you a message. Check it out here: http://mail2sms.co/m/$newMessage->slug";
+
+					//try sending it
+					Sms::send(array('to'=>$phoneNumber, 'text'=>$smsText));
+
+				} catch (Exception $e) {
+					//if fail - send an email back to the sender with the problem; return;
+					$emailData = [
+						'remainingCredits' 	=> $user->credits,
+						'userEmail'			=> $user->email,
+						'error' 			=> $e->getMessage()
+					];
+					Mail::send('emails.problemswithmessage', $emailData, function($message) use ($user)
+					{
+						$message->to($user->email)->subject('Ooops, there was a problem with your message.');
+					});
+					continue;
 				}
-				$smsText = "Hey! $who sent you a message. Check it out here: http://mail2sms.co/$newMessage->slug";
 
-				//try sending it
-				Sms::send(array('to'=>$phoneNumber, 'text'=>$smsText));
+				//all looks good. let's deduct credit from the sender
+				$user->credit = $user->credit-1;
+				$user->save();
 
-			} catch (Exception $e) {
-				//if fail - send an email back to the sender with the problem; return;
+				//and send the success message back to the sender
 				$emailData = [
 					'remainingCredits' 	=> $user->credits,
 					'userEmail'			=> $user->email,
-					'error' 			=> $e->getMessage()
+					'newMessageSlug' 	=> $newMessage->slug,
+					'toNumber' 			=> $phoneNumber
 				];
-				Mail::send('emails.problemswithmessage', $emailData, function($message) use ($user)
+				Mail::send('emails.messagesent', $emailData, function($message) use ($user)
 				{
-					$message->to($user->email)->subject('Ooops, there was a problem with your message.');
+					$message->to($user->email)->subject('Congratulations! Message sent via sms.');
 				});
-				return 'there was an error, sent a message back to the sender with details';
 			}
-
-			//all looks good. let's deduct credit from the sender
-			$user->credit = $user->credit-1;
-
-			//and send the success message back to the sender
-			$emailData = [
-				'remainingCredits' 	=> $user->credits,
-				'userEmail'			=> $user->email,
-				'newMessageSlug' 	=> $newMessage->slug,
-				'toNumber' 			=> $phoneNumber
-			];
-			Mail::send('emails.messagesent', $emailData, function($message) use ($user)
-			{
-				$message->to($user->email)->subject('Ooops, there was a problem with your message.');
-			});
 
 			return 'success!';
 			
 		}
+
+		return 'end';
 
 	}
 

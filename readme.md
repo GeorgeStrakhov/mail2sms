@@ -3,9 +3,7 @@
 _send an email to (number)@mail2sms.com and we will send the subject and a super secret link to read the whole thing to that number_
 
 ## Todo
-### Before Shipping:
-* before final deploy:
-	* turn `debug mode` config off for production
+* optimize sending messages (sms and email) with Laravel Queue
 
 ## Done:
 * install bootstrap, jquery(cdn), theme
@@ -37,3 +35,4 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 * make payments controller send emails
 * inbound email processing: make email controller do the job.
 * send out sms messages (try / catch)
+* before final deploy: turn `debug mode` config off for production
