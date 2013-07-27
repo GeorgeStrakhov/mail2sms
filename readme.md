@@ -3,6 +3,14 @@
 _send an email to (number)@mail2sms.com and we will send the subject and a super secret link to read the whole thing to that number_
 
 ## Todo
+* test everything:
+	- new user from email
+	- new user from payment
+	- old user from email
+	- old user from payment
+	- one phone number on CC
+	- several phone numbers on CC
+	- several phone numbers on CC (some of them incorrect)
 * optimize sending messages (sms and email) with Laravel Queue
 
 ## Done:
