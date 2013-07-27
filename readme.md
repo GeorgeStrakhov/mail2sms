@@ -4,8 +4,6 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 
 ## Todo
 ### Before Shipping:
-* inbound email processing: make email controller do the job.
-* send out sms messages (try / catch)
 * before final deploy:
 	* turn `debug mode` config off for production
 
@@ -37,3 +35,5 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 	+ messagesent
 	+ notenoughcredits
 * make payments controller send emails
+* inbound email processing: make email controller do the job.
+* send out sms messages (try / catch)
