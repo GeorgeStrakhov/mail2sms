@@ -12,6 +12,8 @@ _send an email to (number)@mail2sms.com and we will send the subject and a super
 	- several phone numbers on CC
 	- several phone numbers on CC (some of them incorrect)
 * optimize sending messages (sms and email) with Laravel Queue
+* integrate with cloudinary to work with attachments (inline images? will be a problem)
+* integrate with embed.ly to display vides etc.
 
 ## Done:
 * install bootstrap, jquery(cdn), theme
