@@ -24,6 +24,8 @@
 		Texty, our little sms typing robot performs basic checks, and will send you warning if you try a number that doesn't exists. But it can't always guess right what you mean. Let's say you forget the country code of Hong Kong and just type in 94377498. In that case Texty will think that you are trying to send a message to somebody in Sri Lanka (+94 is the code of Sri Lanka).
 	</p>
 	<p>
+		You can find more information about country codes <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes">here</a>.
+	<p>
 		Take care!<br />
 		mail2sms.co folks
 	</p>
