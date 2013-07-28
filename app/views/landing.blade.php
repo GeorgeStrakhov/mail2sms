@@ -58,7 +58,7 @@
 		<div class="modal-body">
 			<p>What's your phone number?</p>
 			<input type="text" id="mobileNumber" value="+{{$countryCode}}" class="input-block-level" />
-			<small class="muted">Please make sure to put the correct country code in.</small><br />
+			<small class="muted">Please make sure to put the correct country code in. Please refer to <a href="/phonenumberguide">phone number guide</a>.</small><br />
 			<small class="muted">By using this you agree to to our <a href="/tos">terms of service</a>.</small>
 		</div>
 		<div class="modal-footer" style="text-align: center">

@@ -40,6 +40,11 @@ class HomeController extends BaseController {
 		return View::make('tos');
 	}
 
+	public function getPhonenumberguide()
+	{
+		return View::make('phonenumberguide');
+	}
+
 	/*
 	* get guess country name from user ip
 	*/

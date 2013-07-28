@@ -51,7 +51,11 @@ class InboundEmailController extends BaseController {
 
 			//extract the phone number
 			if(!$newMessage->to) return '"to" not passed';
-			$phoneNumber = '+'.explode('@', $newMessage->to)[0];
+			$phoneNumber = explode('@', $newMessage->to)[0];
+			if($phoneNumber[0] != '+'){
+				$phoneNumber = '+'.$phoneNumber;
+			}
+
 			//extract the from email
 			if(!$newMessage->from_email) return '"from_email" not passed';
 			$senderEmail = $newMessage->from_email;
