@@ -13,4 +13,6 @@
     <div style="text-align: center; margin: 20px;">
         <a href="mailto:{{$message->from_email}}" class="btn btn-large btn-green rounded">reply</a>
     </div>
+    <hr />
+    <p class="muted">Want to get your messages delivered to people's phones? Put their phone on CC like this: {{$message->to}}</p>
 @stop
